@@ -362,7 +362,7 @@ function translateContent() {
 }
 
 function renderDirection() {
-    document.write("<h1><big>inQ</big></h1>");
+    document.write("<span class=\"notranslate\"><h1><big>inQ</big></h1></span>");
     document.write("<h2>PREFERENCES IN WAYS OF ASKING QUESTIONS AND MAKING DECISIONS</h2>");
     document.write("<h5>by Allen F. Harrison, M.P.A. & Robert M. Bramson, Ph.D.</h5>");
 
@@ -383,14 +383,14 @@ function renderQuestionnaire() {
         const object = questionnaire[i];
 
         document.write("<tr><td></td><td colspan=\"7\"><div id=\"q" + i + "\" style=\"background-color:" + errorColor + "; text-align:right;\"></div></td></tr>");
-        document.write("<tr><th valign=\"top\">" + object.item + ".</th><th align=\"left\">" + object.question + "<th></th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>");
+        document.write("<tr><th valign=\"top\"><span class=\"notranslate\">" + object.item + ".</span></th><th align=\"left\">" + object.question + "<th></th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>");
 
         for (let j = 0; j < object.answers.length; j++) {
             const n = j+1;
             const name = i + "-" + j;
             const id = object.type[j];
 
-            document.write("<tr><td></td><td>" + n + ". " + object.answers[j] + "</td><td>&nbsp;&nbsp;&nbsp;&nbsp;</td>");
+            document.write("<tr><td></td><td><span class=\"notranslate\">" + n + ". </span>" + object.answers[j] + "</td><td>&nbsp;&nbsp;&nbsp;&nbsp;</td>");
             document.write("<td><input type=\"radio\" name=\"" + name + "\" + id=\"" + id + "\" value=\"1\"></td>");
             document.write("<td><input type=\"radio\" name=\"" + name + "\" + id=\"" + id + "\" value=\"2\"></td>");
             document.write("<td><input type=\"radio\" name=\"" + name + "\" + id=\"" + id + "\" value=\"3\"></td>");
@@ -450,7 +450,7 @@ function renderReport() {
 
     document.write("</table>");
     document.write("</div>");
-    reportContainer = document.getElementById("reportContainer").style.display = "none";
+    document.getElementById("reportContainer").style.display = "none";
 }
 
 function evaluateResult() {
@@ -541,8 +541,8 @@ function evaluateResult() {
         data: [
             {
                 type: "pie",
-                showInLegend: true,
-                legendText: "{indexLabel}",
+                //showInLegend: true,
+                //legendText: "{indexLabel}",
                 dataPoints: [
                     { y: localStorage.getItem(keyTotal + "s"), indexLabel: results["s"].label + " (" + localStorage.getItem(keyTotal + "s") + ")" },
                     { y: localStorage.getItem(keyTotal + "i"), indexLabel: results["i"].label + " (" + localStorage.getItem(keyTotal + "i") + ")" },
@@ -607,4 +607,6 @@ function resetResult() {
             element.checked = false;
         }
     }
+
+    document.getElementById("reportContainer").style.display = "none";
 }
