@@ -436,15 +436,15 @@ function populateExistingData() {
         + "r = " + totalR);
 */
 
-    if ((totalS+totalI+totalP+totalA+totalR) == 270) {
+    //if ((totalS+totalI+totalP+totalA+totalR) == 270) {
         evaluateResult();
-    }
+    //}
 }
 
 function renderReport() {
     document.write("<div id=\"reportContainer\" style=\"background-color:" + contrastColor +"; padding:10px;\">");
     document.write("<h3>REPORT</h3>");
-    document.write("<div id=\"piechart\" style=\"width:400px; height:300px;\"></div>");
+    document.write("<div id=\"piechart\" style=\"width:100%; height:300px;\"></div>");
     document.write("<br/>");
     document.write("<table>");
 
@@ -459,21 +459,21 @@ function renderReport() {
         document.write("<td width=\"33%\"><dl><dt>Characterized by:</dt>");
 
         for (let j = 0; j < characterized.length; j++)
-            document.write("<dd>- " + characterized[j] + "</dd>");
+            document.write("- " + characterized[j] + "<br/>");
 
         document.write("</dl></td>");
 
         document.write("<td width=\"33%\"><dl><dt>Strengths:</dt>");
 
         for (let j = 0; j < strengths.length; j++)
-            document.write("<dd>- " + strengths[j] + "</dd>");
+            document.write("- " + strengths[j] + "<br/>");
 
         document.write("</dl></td>");
 
         document.write("<td width=\"33%\"><dl><dt>Liabilities:</dt>");
 
         for (let j = 0; j < liabilities.length; j++)
-            document.write("<dd>- " + liabilities[j] + "</dd>");
+            document.write("- " + liabilities[j] + "<br/>");
 
         document.write("</dl></td>");
         document.write("</tr>");
