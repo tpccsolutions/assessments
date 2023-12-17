@@ -428,11 +428,13 @@ function populateExistingData() {
         }
     }
 
+/*    // for debug only
     alert("s = " + totalS + "\n"
         + "i = " + totalI + "\n"
         + "p = " + totalP + "\n"
         + "a = " + totalA + "\n"
         + "r = " + totalR);
+*/
 
     if ((totalS+totalI+totalP+totalA+totalR) == 270) {
         evaluateResult();
