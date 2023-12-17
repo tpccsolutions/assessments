@@ -423,14 +423,6 @@ function populateExistingData() {
         }
     }
 
-/*    // for debug only
-    alert("s = " + totalS + "\n"
-        + "i = " + totalI + "\n"
-        + "p = " + totalP + "\n"
-        + "a = " + totalA + "\n"
-        + "r = " + totalR);
-*/
-
     evaluateResult();
 }
 
@@ -565,11 +557,12 @@ function evaluateResult() {
 
     chart.render();
 
-    const totalS = localStorage.getItem(keyTotal + "s");
-    const totalI = localStorage.getItem(keyTotal + "i");
-    const totalP = localStorage.getItem(keyTotal + "p");
-    const totalA = localStorage.getItem(keyTotal + "a");
-    const totalR = localStorage.getItem(keyTotal + "r");
+    const totalS = parseInt(localStorage.getItem(keyTotal + "s"));
+    const totalI = parseInt(localStorage.getItem(keyTotal + "i"));
+    const totalP = parseInt(localStorage.getItem(keyTotal + "p"));
+    const totalA = parseInt(localStorage.getItem(keyTotal + "a"));
+    const totalR = parseInt(localStorage.getItem(keyTotal + "r"));
+    console.log("s = " + totalS + ", i = " + totalI + ", p = " + totalP + ", a = " + totalA + ",r = " + totalR);
 
     if ((totalS+totalI+totalP+totalA+totalR) == 270) {
         reportContainer.style.display = "block";
