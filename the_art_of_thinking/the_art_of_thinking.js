@@ -556,7 +556,7 @@ function evaluateResult() {
 
     chart.render();
 
-    if (checkShouldDisplay()) {
+    if (isResultValidate()) {
         reportContainer.style.display = "block";
     } else {
         reportContainer.style.display = "none";
@@ -576,12 +576,12 @@ function populateExistingData() {
         }
     }
 
-    if (isExistingResultValidate()) {
+    if (isResultValidate()) {
         evaluateResult();
     }
 }
 
-function isExistingResultValidate() {
+function isResultValidate() {
     const totalS = parseInt(localStorage.getItem(keyTotal + "s"));
     const totalI = parseInt(localStorage.getItem(keyTotal + "i"));
     const totalP = parseInt(localStorage.getItem(keyTotal + "p"));
