@@ -382,6 +382,7 @@ function renderQuestionnaire() {
     for (let i = 0; i < questionnaire.length; i++) {
         const object = questionnaire[i];
 
+        document.write("<tr><td></td><td colspan=\"7\"><div id=\"q" + i + "\" style=\"background-color:" + errorColor + "; text-align:right;\"></div></td></tr>");
         document.write("<tr><th valign=\"top\">" + object.item + ".</th><th align=\"left\">" + object.question + "<th></th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>");
 
         for (let j = 0; j < object.answers.length; j++) {
@@ -397,7 +398,6 @@ function renderQuestionnaire() {
             document.write("<td><input type=\"radio\" name=\"" + name + "\" + id=\"" + id + "\" value=\"5\"></td></tr>");
         }
 
-        document.write("<tr><td></td><td colspan=\"7\"><div id=\"q" + i + "\" style=\"background-color:" + errorColor + "; text-align:right;\"></div></td></tr>");
         document.write("<tr><td>&nbsp;</td></tr>");
     }
 
@@ -408,22 +408,6 @@ function renderQuestionnaire() {
     document.write("<td><button type=\"button\" onclick=\"evaluateResult();\">Submit</button></td>");
     document.write("</tr></table>");
     document.write("<br/><br/>");
-}
-
-function populateExistingData() {
-    const elements = document.getElementsByTagName("input");
-
-    for (let i = 0; i < elements.length; i++) {
-        const element = elements[i];
-
-        if (element.type == "radio") {
-            if (localStorage.getItem(keyRadioButton + element.name) == element.value) {
-                element.checked = true;
-            }
-        }
-    }
-
-    evaluateResult();
 }
 
 function renderReport() {
@@ -513,6 +497,7 @@ function evaluateResult() {
     for (let i = 0; i < responseMap.length; i++)
     {
         const response = responseMap[i];
+        const currentElement = document.getElementById("q" + i);
         let missingRank = [];
         let duplicateRank = [];
 
@@ -526,14 +511,28 @@ function evaluateResult() {
             }
         }
 
+        var issueElement;
+
         if (missingRank.length > 0) {
             missingRank = missingRank.join(", ");
-            document.getElementById("q" + i).innerHTML = document.getElementById("q" + i).innerHTML + "<div><font color=\"white\">&nbsp;== Rank " + missingRank + " missing! ==&nbsp;</font></div>";
+            currentElement.innerHTML = currentElement.innerHTML + "<div><font color=\"white\">&nbsp;== Rank " + missingRank + " missing! ==&nbsp;</font></div>";
+
+            if (!issueElement) {
+                issueElement = currentElement;
+            }
         }
 
         if (duplicateRank.length > 0) {
             duplicateRank = duplicateRank.join(", ");
-            document.getElementById("q" + i).innerHTML = document.getElementById("q" + i).innerHTML + "<div><font color=\"white\">&nbsp;== Rank " + duplicateRank + " duplicated! ==&nbsp;</font></div>";
+            currentElement.innerHTML = currentElement.innerHTML + "<div><font color=\"white\">&nbsp;== Rank " + duplicateRank + " duplicated! ==&nbsp;</font></div>";
+
+            if (!issueElement) {
+                issueElement = currentElement;
+            }
+        }
+
+        if (issueElement) {
+            issueElement.scrollIntoView();
         }
     }
 
@@ -557,6 +556,32 @@ function evaluateResult() {
 
     chart.render();
 
+    if (checkShouldDisplay()) {
+        reportContainer.style.display = "block";
+    } else {
+        reportContainer.style.display = "none";
+    }
+}
+
+function populateExistingData() {
+    const elements = document.getElementsByTagName("input");
+
+    for (let i = 0; i < elements.length; i++) {
+        const element = elements[i];
+
+        if (element.type == "radio") {
+            if (localStorage.getItem(keyRadioButton + element.name) == element.value) {
+                element.checked = true;
+            }
+        }
+    }
+
+    if (isExistingResultValidate()) {
+        evaluateResult();
+    }
+}
+
+function isExistingResultValidate() {
     const totalS = parseInt(localStorage.getItem(keyTotal + "s"));
     const totalI = parseInt(localStorage.getItem(keyTotal + "i"));
     const totalP = parseInt(localStorage.getItem(keyTotal + "p"));
@@ -565,9 +590,9 @@ function evaluateResult() {
     console.log("s = " + totalS + ", i = " + totalI + ", p = " + totalP + ", a = " + totalA + ",r = " + totalR);
 
     if ((totalS+totalI+totalP+totalA+totalR) == 270) {
-        reportContainer.style.display = "block";
+        return true;
     } else {
-        reportContainer.style.display = "none";
+        return false;
     }
 }
 
