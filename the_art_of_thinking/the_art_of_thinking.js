@@ -436,9 +436,9 @@ function populateExistingData() {
         + "r = " + totalR);
 */
 
-    //if ((totalS+totalI+totalP+totalA+totalR) == 270) {
+    if ((totalS+totalI+totalP+totalA+totalR) == 270) {
         evaluateResult();
-    //}
+    }
 }
 
 function renderReport() {
