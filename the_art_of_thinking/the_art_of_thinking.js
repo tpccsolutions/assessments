@@ -544,11 +544,11 @@ function evaluateResult() {
                 showInLegend: true,
                 legendText: "{indexLabel}",
                 dataPoints: [
-                    { y: localStorage.getItem(keyTotal + "s"), indexLabel: results["s"].label },
-                    { y: localStorage.getItem(keyTotal + "i"), indexLabel: results["i"].label },
-                    { y: localStorage.getItem(keyTotal + "p"), indexLabel: results["p"].label },
-                    { y: localStorage.getItem(keyTotal + "a"), indexLabel: results["a"].label },
-                    { y: localStorage.getItem(keyTotal + "r"), indexLabel: results["r"].label }
+                    { y: localStorage.getItem(keyTotal + "s"), indexLabel: results["s"].label + " (" + localStorage.getItem(keyTotal + "s") + ")" },
+                    { y: localStorage.getItem(keyTotal + "i"), indexLabel: results["i"].label + " (" + localStorage.getItem(keyTotal + "i") + ")" },
+                    { y: localStorage.getItem(keyTotal + "p"), indexLabel: results["p"].label + " (" + localStorage.getItem(keyTotal + "p") + ")" },
+                    { y: localStorage.getItem(keyTotal + "a"), indexLabel: results["a"].label + " (" + localStorage.getItem(keyTotal + "a") + ")" },
+                    { y: localStorage.getItem(keyTotal + "r"), indexLabel: results["r"].label + " (" + localStorage.getItem(keyTotal + "r") + ")" }
                 ]
             }
         ]
