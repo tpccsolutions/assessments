@@ -382,7 +382,7 @@ function renderQuestionnaire() {
     for (let i = 0; i < questionnaire.length; i++) {
         const object = questionnaire[i];
 
-        document.write("<tr><th>" + object.item + ".</th><th align=\"left\">" + object.question + "<th></th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>");
+        document.write("<tr><th valign=\"top\">" + object.item + ".</th><th align=\"left\">" + object.question + "<th></th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>");
 
         for (let j = 0; j < object.answers.length; j++) {
             const n = j+1;
@@ -411,11 +411,6 @@ function renderQuestionnaire() {
 }
 
 function populateExistingData() {
-    const totalS = localStorage.getItem(keyTotal + "s");
-    const totalI = localStorage.getItem(keyTotal + "i");
-    const totalP = localStorage.getItem(keyTotal + "p");
-    const totalA = localStorage.getItem(keyTotal + "a");
-    const totalR = localStorage.getItem(keyTotal + "r");
     const elements = document.getElementsByTagName("input");
 
     for (let i = 0; i < elements.length; i++) {
@@ -436,9 +431,7 @@ function populateExistingData() {
         + "r = " + totalR);
 */
 
-    if ((totalS+totalI+totalP+totalA+totalR) == 270) {
-        evaluateResult();
-    }
+    evaluateResult();
 }
 
 function renderReport() {
@@ -571,6 +564,18 @@ function evaluateResult() {
     });
 
     chart.render();
+
+    const totalS = localStorage.getItem(keyTotal + "s");
+    const totalI = localStorage.getItem(keyTotal + "i");
+    const totalP = localStorage.getItem(keyTotal + "p");
+    const totalA = localStorage.getItem(keyTotal + "a");
+    const totalR = localStorage.getItem(keyTotal + "r");
+
+    if ((totalS+totalI+totalP+totalA+totalR) > 270) {
+        reportContainer.style.display = "block";
+    } else {
+        reportContainer.style.display = "none";
+    }
 }
 
 function resetResult() {
