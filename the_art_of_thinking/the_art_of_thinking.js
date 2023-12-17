@@ -571,7 +571,7 @@ function evaluateResult() {
     const totalA = localStorage.getItem(keyTotal + "a");
     const totalR = localStorage.getItem(keyTotal + "r");
 
-    if ((totalS+totalI+totalP+totalA+totalR) > 270) {
+    if ((totalS+totalI+totalP+totalA+totalR) == 270) {
         reportContainer.style.display = "block";
     } else {
         reportContainer.style.display = "none";
