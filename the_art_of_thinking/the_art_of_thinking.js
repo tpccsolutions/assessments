@@ -374,6 +374,8 @@ function renderDirection() {
     document.write("<p>Each item in this questionnaire is made up of a statement followed by five possible endings.  Indicate the order in which you believe each ending applies to you.  In the radio buttons to the right of each ending, choose a rank between 1 to 5, indicating the degree to which an ending is most like you (5) and least like you (1).  Do not use any number more than once for any group of give endings.  Even if two or more endings seems equally like you, rank them anyway.  Each ending must be ranked 5, 4, 3, 2 or 1.</p>");
     document.write("</td></tr>");
     document.write("</table>");
+
+    document.write("<h5>Copyright inQ &#169; 1977, 1980. Bramson, Parlette, Harrison and Associates.  All Rights Reserved.</h5>");
 }
 
 function renderQuestionnaire() {
